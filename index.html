@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Entrenamiento Juveniles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="font-roboto bg-cover bg-center min-h-screen" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYzmcqYii-_gDDk26LjfCn1O7FOojK6KmwzA&s');">
+    <div class="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-50">
+        <h1 class="text-white text-4xl md:text-6xl font-bold mb-4">Calculadora Juveniles Beta</h1>
+        <p class="text-white text-lg md:text-2xl mb-8">Explora y disfruta de nuestras funcionalidades</p>
+        <button id="startButton" class="bg-blue-500 text-white px-6 py-3 rounded-full text-lg md:text-xl hover:bg-blue-700 transition duration-300">Comenzar</button>
+    </div>
+    <div id="newSection" class="hidden flex flex-col items-center justify-center min-h-screen bg-green-200">
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+            <table class="table-auto bg-gray-800 rounded-lg shadow-lg text-sm">
+                <thead>
+                    <tr>
+                        <th class="px-2 py-1 text-white bg-gray-900">Habilidad</th>
+                        <th class="px-2 py-1 text-white bg-gray-900">Inicio</th>
+                        <th class="px-2 py-1 text-white bg-gray-900">Final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Portería</td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="7" id="porteriaInicio" class="w-full bg-gray-700 text-white text-center"></td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="8" id="porteriaFinal" class="w-full bg-gray-700 text-white text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Defensa</td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="7" id="defensaInicio" class="w-full bg-gray-700 text-white text-center"></td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="8" id="defensaFinal" class="w-full bg-gray-700 text-white text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Jugadas</td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="7" id="jugadasInicio" class="w-full bg-gray-700 text-white text-center"></td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="8" id="jugadasFinal" class="w-full bg-gray-700 text-white text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Lateral</td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="7" id="lateralInicio" class="w-full bg-gray-700 text-white text-center"></td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="8" id="lateralFinal" class="w-full bg-gray-700 text-white text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Pases</td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="7" id="pasesInicio" class="w-full bg-gray-700 text-white text-center"></td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="8" id="pasesFinal" class="w-full bg-gray-700 text-white text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Anotación</td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="7" id="anotacionInicio" class="w-full bg-gray-700 text-white text-center"></td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="8" id="anotacionFinal" class="w-full bg-gray-700 text-white text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Balón Parado</td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="7" id="balonParadoInicio" class="w-full bg-gray-700 text-white text-center"></td>
+                        <td class="border px-2 py-1 text-white"><input type="number" min="0" max="8" id="balonParadoFinal" class="w-full bg-gray-700 text-white text-center"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table-auto bg-gray-800 rounded-lg shadow-lg text-sm">
+                <thead>
+                    <tr>
+                        <th class="px-2 py-1 text-white bg-gray-900">Plan de entrenamiento</th>
+                        <th class="px-2 py-1 text-white bg-gray-900">Partidos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Portería</td>
+                        <td class="border px-2 py-1 text-white" id="porteriaPartidos">0</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Defensa</td>
+                        <td class="border px-2 py-1 text-white" id="defensaPartidos">0</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Jugadas</td>
+                        <td class="border px-2 py-1 text-white" id="jugadasPartidos">0</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Lateral</td>
+                        <td class="border px-2 py-1 text-white" id="lateralPartidos">0</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Pases</td>
+                        <td class="border px-2 py-1 text-white" id="pasesPartidos">0</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Anotación</td>
+                        <td class="border px-2 py-1 text-white" id="anotacionPartidos">0</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Balón Parado</td>
+                        <td class="border px-2 py-1 text-white" id="balonParadoPartidos">0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table-auto bg-gray-800 rounded-lg shadow-lg text-sm">
+                <thead>
+                    <tr>
+                        <th class="px-2 py-1 text-white bg-gray-900">Entrenamiento 1</th>
+                        <th class="px-2 py-1 text-white bg-gray-900">Entrenamiento 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Portería</td>
+                        <td class="border px-2 py-1 text-white">Portería</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Defensa</td>
+                        <td class="border px-2 py-1 text-white">Defensa (portero, defensas, medios y extremos)</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Jugadas</td>
+                        <td class="border px-2 py-1 text-white">Jugadas</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Lateral</td>
+                        <td class="border px-2 py-1 text-white">Lateral (extremos y delanteros)</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Pases</td>
+                        <td class="border px-2 py-1 text-white">Pases (defensas, medios y extremos)</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Anotación</td>
+                        <td class="border px-2 py-1 text-white">Anotación y Balón Parado</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Balón Parado</td>
+                        <td class="border px-2 py-1 text-white">Balón Parado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.getElementById('startButton').addEventListener('click', function() {
+            document.querySelector('.bg-black').classList.add('hidden');
+            document.getElementById('newSection').classList.remove('hidden');
+        });
+
+        const calculatePartidosPorteria = (inicio, final) => {
+            if (inicio >= final) return 0;
+            const diff = final - inicio;
+            if (final === 8) {
+                switch (inicio) {
+                    case 1: return 20;
+                    case 2: return 18;
+                    case 3: return 16;
+                    case 4: return 14;
+                    case 5: return 11;
+                    case 6: return 8;
+                    case 7: return 4;
+                }
+            } else if (final === 7) {
+                switch (inicio) {
+                    case 1: return 16;
+                    case 2: return 14;
+                    case 3: return 12;
+                    case 4: return 10;
+                    case 5: return 7;
+                    case 6: return 4;
+                }
+            } else if (final === 6) {
+                switch (inicio) {
+                    case 1: return 12;
+                    case 2: return 10;
+                    case 3: return 8;
+                    case 4: return 6;
+                    case 5: return 3;
+                }
+            } else if (final === 5) {
+                switch (inicio) {
+                    case 1: return 9;
+                    case 2: return 7;
+                    case 3: return 5;
+                    case 4: return 3;
+                }
+            } else if (final === 4) {
+                switch (inicio) {
+                    case 1: return 6;
+                    case 2: return 4;
+                    case 3: return 2;
+                }
+            } else if (final === 3) {
+                switch (inicio) {
+                    case 1: return 4;
+                    case 2: return 2;
+                }
+            } else if (final === 2) {
+                if (inicio === 1) return 2;
+            }
+            return 0;
+        };
+
+        const calculatePartidosDefensa = (inicio, final) => {
+            if (inicio >= final) return 0;
+            const diff = final - inicio;
+            if (final === 8) {
+                switch (inicio) {
+                    case 1: return 34;
+                    case 2: return 32;
+                    case 3: return 29;
+                    case 4: return 25;
+                    case 5: return 21;
+                    case 6: return 15;
+                    case 7: return 8;
+                }
+            } else if (final === 7) {
+                switch (inicio) {
+                    case 1: return 26;
+                    case 2: return 24;
+                    case 3: return 21;
+                    case 4: return 17;
+                    case 5: return 13;
+                    case 6: return 7;
+                }
+            } else if (final === 6) {
+                switch (inicio) {
+                    case 1: return 19;
+                    case 2: return 17;
+                    case 3: return 14;
+                    case 4: return 10;
+                    case 5: return 6;
+                }
+            } else if (final === 5) {
+                switch (inicio) {
+                    case 1: return 13;
+                    case 2: return 11;
+                    case 3: return 8;
+                    case 4: return 4;
+                }
+            } else if (final === 4) {
+                switch (inicio) {
+                    case 1: return 9;
+                    case 2: return 7;
+                    case 3: return 4;
+                }
+            } else if (final === 3) {
+                switch (inicio) {
+                    case 1: return 5;
+                    case 2: return 3;
+                }
+            } else if (final === 2) {
+                if (inicio === 1) return 2;
+            }
+            return 0;
+        };
+
+        const calculatePartidosJugadas = (inicio, final) => {
+            if (inicio >= final) return 0;
+            const diff = final - inicio;
+            if (final === 8) {
+                switch (inicio) {
+                    case 1: return 29;
+                    case 2: return 27;
+                    case 3: return 24;
+                    case 4: return 20;
+                    case 5: return 16;
+                    case 6: return 12;
+                    case 7: return 6;
+                }
+            } else if (final === 7) {
+                switch (inicio) {
+                    case 1: return 23;
+                    case 2: return 21;
+                    case 3: return 18;
+                    case 4: return 14;
+                    case 5: return 10;
+                    case 6: return 6;
+                }
+            } else if (final === 6) {
+                switch (inicio) {
+                    case 1: return 17;
+                    case 2: return 15;
+                    case 3: return 12;
+                    case 4: return 8;
+                    case 5: return 4;
+                }
+            } else if (final === 5) {
+                switch (inicio) {
+                    case 1: return 12;
+                    case 2: return 10;
+                    case 3: return 7;
+                    case 4: return 3;
+                }
+            } else if (final === 4) {
+                switch (inicio) {
+                    case 1: return 8;
+                    case 2: return 6;
+                    case 3: return 3;
+                }
+            } else if (final === 3) {
+                switch (inicio) {
+                    case 1: return 5;
+                    case 2: return 3;
+                }
+            } else if (final === 2) {
+                if (inicio === 1) return 2;
+            }
+            return 0;
+        };
+
+        const calculatePartidosLateral = (inicio, final) => {
+            if (inicio >= final) return 0;
+            const diff = final - inicio;
+            if (final === 8) {
+                switch (inicio) {
+                    case 1: return 22;
+                    case 2: return 20;
+                    case 3: return 17;
+                    case 4: return 14;
+                    case 5: return 11;
+                    case 6: return 8;
+                    case 7: return 4;
+                }
+            } else if (final === 7) {
+                switch (inicio) {
+                    case 1: return 18;
+                    case 2: return 16;
+                    case 3: return 13;
+                    case 4: return 10;
+                    case 5: return 7;
+                    case 6: return 4;
+                }
+            } else if (final === 6) {
+                switch (inicio) {
+                    case 1: return 14;
+                    case 2: return 12;
+                    case 3: return 9;
+                    case 4: return 6;
+                    case 5: return 3;
+                }
+            } else if (final === 5) {
+                switch (inicio) {
+                    case 1: return 11;
+                    case 2: return 9;
+                    case 3: return 6;
+                    case 4: return 3;
+                }
+            } else if (final === 4) {
+                switch (inicio) {
+                    case 1: return 8;
+                    case 2: return 6;
+                    case 3: return 3;
+                }
+            } else if (final === 3) {
+                switch (inicio) {
+                    case 1: return 5;
+                    case 2: return 3;
+                }
+            } else if (final === 2) {
+                if (inicio === 1) return 2;
+            }
+            return 0;
+        };
+
+        const calculatePartidosPases = (inicio, final) => {
+            if (inicio >= final) return 0;
+            const diff = final - inicio;
+            if (final === 8) {
+                switch (inicio) {
+                    case 1: return 21;
+                    case 2: return 21;
+                    case 3: return 18;
+                    case 4: return 16;
+                    case 5: return 12;
+                    case 6: return 9;
+                    case 7: return 5;
+                }
+            } else if (final === 7) {
+                switch (inicio) {
+                    case 1: return 16;
+                    case 2: return 16;
+                    case 3: return 13;
+                    case 4: return 11;
+                    case 5: return 7;
+                    case 6: return 4;
+                }
+            } else if (final === 6) {
+                switch (inicio) {
+                    case 1: return 12;
+                    case 2: return 12;
+                    case 3: return 9;
+                    case 4: return 7;
+                    case 5: return 3;
+                }
+            } else if (final === 5) {
+                switch (inicio) {
+                    case 1: return 9;
+                    case 2: return 9;
+                    case 3: return 6;
+                    case 4: return 4;
+                }
+            } else if (final === 4) {
+                switch (inicio) {
+                    case 1: return 5;
+                    case 2: return 5;
+                    case 3: return 2;
+                }
+            } else if (final === 3) {
+                switch (inicio) {
+                    case 1: return 3;
+                    case 2: return 3;
+                }
+            } else if (final === 2) {
+                if (inicio === 1) return 2;
+            }
+            return 0;
+        };
+
+        const calculatePartidosAnotacion = (inicio, final) => {
+            if (inicio >= final) return 0;
+            const diff = final - inicio;
+            if (final === 8) {
+                switch (inicio) {
+                    case 1: return 31;
+                    case 2: return 29;
+                    case 3: return 26;
+                    case 4: return 22;
+                    case 5: return 17;
+                    case 6: return 12;
+                    case 7: return 7;
+                }
+            } else if (final === 7) {
+                switch (inicio) {
+                    case 1: return 24;
+                    case 2: return 22;
+                    case 3: return 19;
+                    case 4: return 15;
+                    case 5: return 10;
+                    case 6: return 5;
+                }
+            } else if (final === 6) {
+                switch (inicio) {
+                    case 1: return 19;
+                    case 2: return 17;
+                    case 3: return 14;
+                    case 4: return 10;
+                    case 5: return 5;
+                }
+            } else if (final === 5) {
+                switch (inicio) {
+                    case 1: return 14;
+                    case 2: return 12;
+                    case 3: return 9;
+                    case 4: return 5;
+                }
+            } else if (final === 4) {
+                switch (inicio) {
+                    case 1: return 9;
+                    case 2: return 7;
+                    case 3: return 4;
+                }
+            } else if (final === 3) {
+                switch (inicio) {
+                    case 1: return 5;
+                    case 2: return 3;
+                }
+            } else if (final === 2) {
+                if (inicio === 1) return 2;
+            }
+            return 0;
+        };
+
+        const calculatePartidosBalonParado = (inicio, final) => {
+            if (inicio >= final) return 0;
+            const diff = final - inicio;
+            if (final === 8) {
+                switch (inicio) {
+                    case 1: return 14;
+                    case 2: return 12;
+                    case 3: return 10;
+                    case 4: return 8;
+                    case 5: return 6;
+                    case 6: return 4;
+                    case 7: return 2;
+                }
+            } else if (final === 7) {
+                switch (inicio) {
+                    case 1: return 12;
+                    case 2: return 10;
+                    case 3: return 8;
+                    case 4: return 6;
+                    case 5: return 4;
+                    case 6: return 2;
+                }
+            } else if (final === 6) {
+                switch (inicio) {
+                    case 1: return 10;
+                    case 2: return 8;
+                    case 3: return 6;
+                    case 4: return 4;
+                    case 5: return 2;
+                }
+            } else if (final === 5) {
+                switch (inicio) {
+                    case 1: return 8;
+                    case 2: return 6;
+                    case 3: return 4;
+                    case 4: return 2;
+                }
+            } else if (final === 4) {
+                switch (inicio) {
+                    case 1: return 6;
+                    case 2: return 4;
+                    case 3: return 2;
+                }
+            } else if (final === 3) {
+                switch (inicio) {
+                    case 1: return 4;
+                    case 2: return 2;
+                }
+            } else if (final === 2) {
+                if (inicio === 1) return 2;
+            }
+            return 0;
+        };
+
+        const validateInput = (input, max) => {
+            if (input.value > max) {
+                input.value = max;
+            }
+        };
+
+        const validateFinalInput = (inicioInput, finalInput) => {
+            const inicio = parseInt(inicioInput.value) || 0;
+            const final = parseInt(finalInput.value) || 0;
+            if (final < inicio) {
+                finalInput.value = inicio;
+            }
+        };
+
+        const inputs = [
+            { inicio: 'porteriaInicio', final: 'porteriaFinal', partidos: 'porteriaPartidos', maxInicio: 7, maxFinal: 8, calculate: calculatePartidosPorteria },
+            { inicio: 'defensaInicio', final: 'defensaFinal', partidos: 'defensaPartidos', maxInicio: 7, maxFinal: 8, calculate: calculatePartidosDefensa },
+            { inicio: 'jugadasInicio', final: 'jugadasFinal', partidos: 'jugadasPartidos', maxInicio: 7, maxFinal: 8, calculate: calculatePartidosJugadas },
+            { inicio: 'lateralInicio', final: 'lateralFinal', partidos: 'lateralPartidos', maxInicio: 7, maxFinal: 8, calculate: calculatePartidosLateral },
+            { inicio: 'pasesInicio', final: 'pasesFinal', partidos: 'pasesPartidos', maxInicio: 7, maxFinal: 8, calculate: calculatePartidosPases },
+            { inicio: 'anotacionInicio', final: 'anotacionFinal', partidos: 'anotacionPartidos', maxInicio: 7, maxFinal: 8, calculate: calculatePartidosAnotacion },
+            { inicio: 'balonParadoInicio', final: 'balonParadoFinal', partidos: 'balonParadoPartidos', maxInicio: 7, maxFinal: 8, calculate: calculatePartidosBalonParado }
+        ];
+
+        inputs.forEach(input => {
+            const inicioInput = document.getElementById(input.inicio);
+            const finalInput = document.getElementById(input.final);
+
+            inicioInput.addEventListener('input', () => {
+                validateInput(inicioInput, input.maxInicio);
+                validateFinalInput(inicioInput, finalInput);
+                const inicio = parseInt(inicioInput.value) || 0;
+                const final = parseInt(finalInput.value) || 0;
+                document.getElementById(input.partidos).innerText = input.calculate(inicio, final);
+            });
+
+            finalInput.addEventListener('input', () => {
+                validateInput(finalInput, input.maxFinal);
+                validateFinalInput(inicioInput, finalInput);
+                const inicio = parseInt(inicioInput.value) || 0;
+                const final = parseInt(finalInput.value) || 0;
+                document.getElementById(input.partidos).innerText = input.calculate(inicio, final);
+            });
+        });
+    </script>
+</body>
+</html>
