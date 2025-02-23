@@ -28,7 +28,14 @@
         <button id="startButton" class="bg-blue-500 text-white px-6 py-3 rounded-full text-lg md:text-xl hover:bg-blue-700 transition duration-300">Comenzar</button>
     </div>
     <div id="newSection" class="hidden flex flex-col items-center justify-center min-h-screen bg-green-200">
+        <!-- Botón de regreso al menú principal -->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUclrTSzFSRhy_HybA-SFHS7sjUt-xLB9XvA&s" 
+             alt="Regresar al menú principal" 
+             class="absolute top-4 right-4 w-12 h-12 cursor-pointer"
+             onclick="document.getElementById('newSection').classList.add('hidden'); document.querySelector('.bg-black').classList.remove('hidden');">
+        
         <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+            <!-- Primera tabla -->
             <table class="table-auto bg-gray-800 rounded-lg shadow-lg text-sm">
                 <thead>
                     <tr>
@@ -75,6 +82,28 @@
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Nueva tabla para Total Partidos y Días para Completar -->
+            <table class="table-auto bg-gray-800 rounded-lg shadow-lg text-sm">
+                <thead>
+                    <tr>
+                        <th class="px-2 py-1 text-white bg-gray-900">Resumen</th>
+                        <th class="px-2 py-1 text-white bg-gray-900">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Total Partidos</td>
+                        <td class="border px-2 py-1 text-white" id="totalPartidos">0</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-white">Días para Completar</td>
+                        <td class="border px-2 py-1 text-white" id="diasParaCompletar">0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Tabla de Plan de Entrenamiento -->
             <table class="table-auto bg-gray-800 rounded-lg shadow-lg text-sm">
                 <thead>
                     <tr>
@@ -113,6 +142,8 @@
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Tabla de Entrenamiento 1 y Entrenamiento 2 -->
             <table class="table-auto bg-gray-800 rounded-lg shadow-lg text-sm">
                 <thead>
                     <tr>
@@ -153,6 +184,7 @@
             </table>
         </div>
     </div>
+
     <script>
         document.getElementById('startButton').addEventListener('click', function() {
             document.querySelector('.bg-black').classList.add('hidden');
@@ -561,6 +593,32 @@
             { inicio: 'balonParadoInicio', final: 'balonParadoFinal', partidos: 'balonParadoPartidos', maxInicio: 7, maxFinal: 8, calculate: calculatePartidosBalonParado }
         ];
 
+        // Función para calcular el total de partidos
+        const calcularTotalPartidos = () => {
+            let total = 0;
+            inputs.forEach(input => {
+                const inicio = parseInt(document.getElementById(input.inicio).value) || 0;
+                const final = parseInt(document.getElementById(input.final).value) || 0;
+                total += input.calculate(inicio, final);
+            });
+            return total;
+        };
+
+        // Función para calcular los días necesarios (Total Partidos * 42 / 8)
+        const calcularDiasParaCompletar = (totalPartidos) => {
+            return Math.ceil((totalPartidos * 42) / 8); // Total Partidos * 42 / 8
+        };
+
+        // Función para actualizar el resumen
+        const actualizarResumen = () => {
+            const totalPartidos = calcularTotalPartidos();
+            const diasParaCompletar = calcularDiasParaCompletar(totalPartidos);
+
+            document.getElementById('totalPartidos').innerText = totalPartidos;
+            document.getElementById('diasParaCompletar').innerText = diasParaCompletar;
+        };
+
+        // Actualizar el resumen cada vez que se modifique un campo
         inputs.forEach(input => {
             const inicioInput = document.getElementById(input.inicio);
             const finalInput = document.getElementById(input.final);
@@ -571,6 +629,7 @@
                 const inicio = parseInt(inicioInput.value) || 0;
                 const final = parseInt(finalInput.value) || 0;
                 document.getElementById(input.partidos).innerText = input.calculate(inicio, final);
+                actualizarResumen(); // Actualizar el resumen
             });
 
             finalInput.addEventListener('input', () => {
@@ -579,8 +638,12 @@
                 const inicio = parseInt(inicioInput.value) || 0;
                 const final = parseInt(finalInput.value) || 0;
                 document.getElementById(input.partidos).innerText = input.calculate(inicio, final);
+                actualizarResumen(); // Actualizar el resumen
             });
         });
+
+        // Inicializar el resumen al cargar la página
+        actualizarResumen();
     </script>
 </body>
 </html>
